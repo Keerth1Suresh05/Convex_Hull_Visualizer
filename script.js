@@ -2,7 +2,6 @@ class GrahamScanVisualizer {
     constructor() {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
-
         this.points = [];
         this.sortedPoints = [];
         this.hull = [];
@@ -323,4 +322,5 @@ class GrahamScanVisualizer {
 
 window.addEventListener("load", () => {
     new GrahamScanVisualizer();
+
 });
