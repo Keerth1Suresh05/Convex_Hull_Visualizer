@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convex Hull - Graham Scan Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Convex Hull - Graham Scan Visualizer</h1>
+            <h2>Divide and Conquer</h2>
+            <div class="controls">
+                <button id="generateBtn">New Points</button>
+                <button id="startBtn">Start Graham Scan</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="stepBtn">Step</button>
+                <button id="resetBtn">Reset</button>
+                <input type="range" id="pointCount" min="10" max="50" value="25">
+                <span id="countDisplay">25</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="visualizer">
+                <canvas id="canvas" width="800" height="500"></canvas>
+                <div class="legend">
+                    <span class="interior">Interior</span>
+                    <span class="p0">P₀ (Start)</span>
+                    <span class="sorting">Polar Sort</span>
+                    <span class="current">Current</span>
+                    <span class="ccw">Counter Clockwise turn (CCW) ✓</span>
+                    <span class="cw">Clockwise turn (CW) ✗</span>
+                    <span class="hull">Hull</span>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="steps-panel">
+                    <h3>Step: <span id="stepCounter">0</span></h3>
+                    <div id="stepDescription">Click "New Points" to begin</div>
+                </div>
+
+                <div class="complexity-panel">
+                    <h3>Time Complexity: O(n log n)</h3>
+                    <div class="recurrence">
+                        <code>T(n) = O(n) + O(n log n) + O(n)</code><br>
+                        <code>Find P₀ + Polar Sort + CCW Scan</code>
+                        <div class="arrow">↓ Dominant = O(n log n)</div>
+                    </div>
+                    <div class="tree-vis">
+                        <div class="tree-level">1. P₀: min y-coordinate O(n)</div>
+                        <div class="tree-level">2. Sort: polar angle O(n log n)</div>
+                        <div class="tree-level">3. Scan: CCW test O(n)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="algorithm-steps">
+            <h3> Graham Scan Algorithm</h3>
+            <div class="phase find-p0">1. Find P₀ (lowest Y)</div>
+            <div class="phase polar-sort">2. Polar sort (cross product)</div>
+            <div class="phase scan">3. Conter clockwise scan (while cross ≤ 0: pop)</div>
+        </div>
+        <div class="dc-panel">
+    <h3>Divide and Conquer Approach</h3>
+
+    <div class="dc-box divide">
+        <h4>Divide</h4>
+        <p>
+            Find the starting point <b>P₀</b> (lowest Y value).
+            Then sort all other points by their
+            <b>polar angle relative to P₀</b>.
+        </p>
+    </div>
+
+    <div class="dc-box conquer">
+        <h4>Conquer</h4>
+        <p>
+            Scan the sorted points and build the hull.
+            Use the <b>CCW test</b> to detect turns.
+            Remove points that create a clockwise turn.
+        </p>
+    </div>
+
+    <div class="dc-box combine">
+        <h4>Combine</h4>
+        <p>
+            The remaining points in the stack form
+            the <b>convex hull boundary</b>.
+            Connecting them creates the final polygon.
+        </p>
+    </div>
+
+</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
